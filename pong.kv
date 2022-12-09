@@ -1,0 +1,57 @@
+#creating <PongBall> widget
+<PongBall>:
+    size: 50, 50 #Giving size
+    canvas:
+        Ellipse: #giving an eclipse shape to the ball
+            pos: self.pos #giving position to ball by referring to the widget
+            size: self.size #referring to the size given above
+
+#creating <PongPaddle> widget
+<PongPaddle>:
+    size: 25, 200  #giving size to the paddles
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+#creating <PongGame> widget and its properties
+<PongGame>:
+    ball: pong_ball
+    player1: player_left
+    player2: player_right
+
+
+    canvas:
+        Rectangle:
+            pos: self.center_x - 5, 0
+            size: 10, self.height
+
+#creating the Labels to display player 1 and player 2 score
+    Label:
+        font_size: 70
+        center_x: root.width / 4
+        top: root.top - 50
+        text: str(root.player1.score)
+
+    Label:
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+        text: str(root.player2.score)
+
+#Positioning pong ball
+    PongBall:
+        id: pong_ball
+        center: self.parent.center #centering the pong ball to center by referring to the parent  class
+
+
+#Positioning pong paddles of player 1 and 2
+    PongPaddle:
+        id: player_left
+        x: root.x
+        center_y: root.center_y
+
+    PongPaddle:
+        id: player_right
+        x: root.width - self.width
+        center_y: root.center_y
